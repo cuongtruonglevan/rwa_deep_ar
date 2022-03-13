@@ -16,44 +16,42 @@ enum CameraMode { masks, effects, filters }
 enum CameraDirection { back, front }
 
 enum Masks {
-  none,
-  aviators,
-  bigmouth,
-  dalmatian,
-  bcgSeg,
-  look2,
-  fatify,
-  flowers,
-  grumpycat,
-  koala,
-  lion,
-  mudMask,
-  obama,
-  pug,
-  slash,
-  sleepingmask,
-  smallface,
-  teddycigar,
-  tripleface,
-  twistedFace,
+  None,
+  Aviators,
+  Bigmouth,
+  Dalmatian,
+  Flowers,
+  Koala,
+  Lion,
+  Smallface,
+  Teddycigar,
+  Kanye,
+  Tripleface,
+  Sleepingmask,
+  Fatify,
+  Obama,
+  MudMask,
+  Pug,
+  Slash,
+  TwistedFace,
+  Grumpycat,
 }
 
 enum Effects {
-  none,
-  fire,
-  heart,
-  blizzard,
-  rain,
+  None,
+  Fire,
+  Rain,
+  Heart,
+  Blizzard,
 }
 
 enum Filters {
-  none,
-  tv80,
-  drawingmanga,
-  sepia,
-  bleachbypass,
-  realvhs,
-  filmcolorperfection,
+  None,
+  Filmcolorperfection,
+  Tv80,
+  Drawingmanga,
+  Sepia,
+  Bleachbypass,
 }
 
 class CameraDeepAr extends StatefulWidget {
@@ -65,51 +63,28 @@ class CameraDeepAr extends StatefulWidget {
   final RecordingMode recordingMode;
   final CameraDirection cameraDirection;
   final CameraMode cameraMode;
-  final List<Filters> supportedFilters;
-  final List<Masks> supportedMasks;
-  final List<Effects> supportedEffects;
 
-  const CameraDeepAr(
-      {Key? key,
-      required this.cameraDeepArCallback,
-      required this.androidLicenceKey,
-      required this.iosLicenceKey,
-      required this.onImageCaptured,
-      required this.onVideoRecorded,
-      required this.onCameraReady,
-      this.cameraMode = CameraMode.masks,
-      this.cameraDirection = CameraDirection.front,
-      this.recordingMode = RecordingMode.video,
-      this.supportedFilters = const [
-        Filters.sepia,
-        Filters.bleachbypass,
-      ],
-      this.supportedMasks = const [
-        Masks.none,
-        Masks.aviators,
-        Masks.bigmouth,
-        Masks.dalmatian,
-        Masks.look2,
-        Masks.flowers,
-        Masks.grumpycat,
-        Masks.lion,
-      ],
-      this.supportedEffects = const [
-        Effects.none,
-        Effects.fire,
-        Effects.heart,
-      ]})
-      : super(key: key);
+  const CameraDeepAr({
+    Key? key,
+    required this.cameraDeepArCallback,
+    required this.androidLicenceKey,
+    required this.iosLicenceKey,
+    required this.onImageCaptured,
+    required this.onVideoRecorded,
+    required this.onCameraReady,
+    this.cameraMode = CameraMode.masks,
+    this.cameraDirection = CameraDirection.front,
+    this.recordingMode = RecordingMode.video,
+  }) : super(key: key);
   @override
   _CameraDeepArState createState() => _CameraDeepArState();
 }
 
 class _CameraDeepArState extends State<CameraDeepAr> {
-  CameraDeepArController? _controller;
   bool hasPermission = false;
-  List<Effects> get supportedEffects => widget.supportedEffects;
-  List<Filters> get supportedFilters => widget.supportedFilters;
-  List<Masks> get supportedMasks => widget.supportedMasks;
+  // List<Effects> get supportedEffects => Effects.values;
+  // List<Filters> get supportedFilters => Filters.values;
+  // List<Masks> get supportedMasks => Masks.values;
 
   @override
   void initState() {
@@ -151,7 +126,6 @@ class _CameraDeepArState extends State<CameraDeepAr> {
       this,
     );
     widget.cameraDeepArCallback(controller);
-    _controller = controller;
   }
 
   void onImageCaptured(String path) {
@@ -278,38 +252,23 @@ class CameraDeepArController {
   }
 
   Future changeMask(int p) async {
-    int sendNative = p;
-    if (_cameraDeepArState.supportedEffects.isNotEmpty) {
-      Masks e = _cameraDeepArState.supportedMasks[p];
-      sendNative = Masks.values.indexOf(e);
-    }
     if (p > Masks.values.length - 1) p = 0;
     return channel.invokeMethod('changeMask', <String, dynamic>{
-      'mask': sendNative,
+      'mask': p,
     });
   }
 
   Future changeEffect(int p) async {
-    int sendNative = p;
-    if (_cameraDeepArState.supportedEffects.isNotEmpty) {
-      Effects e = _cameraDeepArState.supportedEffects[p];
-      sendNative = Effects.values.indexOf(e);
-    }
     if (p > Effects.values.length - 1) p = 0;
     return channel.invokeMethod('changeEffect', <String, dynamic>{
-      'effect': sendNative,
+      'effect': p,
     });
   }
 
   Future changeFilter(int p) async {
-    int sendNative = p;
-    if (_cameraDeepArState.supportedEffects.isNotEmpty) {
-      Filters e = _cameraDeepArState.supportedFilters[p];
-      sendNative = Filters.values.indexOf(e);
-    }
     if (p > Filters.values.length - 1) p = 0;
     return channel.invokeMethod('changeFilter', <String, dynamic>{
-      'filter': sendNative,
+      'filter': p,
     });
   }
 }
