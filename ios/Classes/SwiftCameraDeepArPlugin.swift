@@ -29,42 +29,42 @@ enum RecordingMode : String, CaseIterable {
 }
 
 enum Masks: String, CaseIterable {
-    case None
-    case Aviators
-    case Bigmouth
-    case Dalmatian
-    case Flowers
-    case Koala
-    case Lion
-    case Smallface
-    case Teddycigar
-    case Kanye
-    case Tripleface
-    case Sleepingmask
-    case Fatify
-    case Obama
-    case MudMask
-    case Pug
-    case Slash
-    case TwistedFace
-    case Grumpycat
+    case none
+    case aviators
+    case bigmouth
+    case dalmatian
+    case flowers
+    case koala
+    case lion
+    case smallface
+    case teddycigar
+    case kanye
+    case tripleface
+    case sleepingmask
+    case fatify
+    case obama
+    case mudMask
+    case pug
+    case slash
+    case twistedFace
+    case grumpycat
 }
 
 enum Effects: String, CaseIterable {
-    case None
-    case Fire
-    case Rain
-    case Heart
-    case Blizzard
+    case none
+    case fire
+    case rain
+    case heart
+    case blizzard
 }
 
 enum Filters: String, CaseIterable {
-    case None
-    case Filmcolorperfection
-    case Tv80
-    case Drawingmanga
-    case Sepia
-    case Bleachbypass 
+    case none
+    case filmcolorperfection
+    case tv80
+    case drawingmanga
+    case sepia
+    case bleachbypass 
 }
 
 //Factory view for camera ar
