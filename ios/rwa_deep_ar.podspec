@@ -1,6 +1,6 @@
 #
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html.
-# Run `pod lib lint camera_deep_ar.podspec' to validate before publishing.
+# Run `pod lib lint rwa_deep_ar.podspec' to validate before publishing.
 #
 Pod::Spec.new do |s|
   s.name             = 'rwa_deep_ar'
@@ -15,26 +15,13 @@ A new Flutter plugin.
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.platform = :ios, '12.0'
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
-  
-  # Flutter.framework does not contain a i386 slice.
+  s.platform = :ios, '9.0'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
-  s.swift_version = '5.0'
-
 
   #My own addition to the .podspec
   s.preserve_paths = 'DeepAR.framework'
   s.xcconfig = { 'OTHER_LDFLAGS' => '-framework DeepAR' }
   s.vendored_frameworks = 'DeepAR.framework'
-
-#  s.resource_bundles = {
-#    'Effects' => ['rwa_deep_ar/Effects/**/*']
-#  }
-#  s.resource = 'Pod/Resources/**/*'
   s.resources = ['Effects/*']
   s.resource_bundle = { 'Effects' => 'Effects/*.' }
-
-
-
 end

@@ -81,11 +81,7 @@ class CameraDeepAr extends StatefulWidget {
 }
 
 class _CameraDeepArState extends State<CameraDeepAr> {
-  bool hasPermission = false;
-  // List<Effects> get supportedEffects => Effects.values;
-  // List<Filters> get supportedFilters => Filters.values;
-  // List<Masks> get supportedMasks => Masks.values;
-
+  
   @override
   void initState() {
     super.initState();
