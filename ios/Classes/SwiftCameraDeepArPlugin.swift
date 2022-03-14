@@ -531,7 +531,7 @@ public class DeepArCameraView : NSObject,FlutterPlatformView,DeepARDelegate{
 
 extension String {
     var path: String? {
-        let filePath = Bundle.main.resourcePath!+"/Frameworks/camera_deep_ar.framework/\(self)"
+        let filePath = Bundle.main.resourcePath!+"/Frameworks/rwa_camera_ar.framework/\(self)"
         
         print("Path-find \(self) >>>> \(String(describing: filePath)) >>> ")
         return filePath
